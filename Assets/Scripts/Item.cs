@@ -36,6 +36,19 @@ public class Item : MonoBehaviour
             randomMove.y = randomMove.y * -1;
         }
         #endregion
+
+        if(collision.tag == "Player" && gameObject.tag == "Power")
+        {
+            Player.power++;
+            Destroy(gameObject);
+            Debug.Log(Player.power);
+        }
+        else if(collision.tag == "Player" && gameObject.tag == "Bomb")
+        {
+            Player.bomb++;
+            Destroy(gameObject);
+            Debug.Log(Player.bomb);
+        }
     }
 
 

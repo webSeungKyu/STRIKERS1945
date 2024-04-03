@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
     public GameObject bullet;
     public Transform pos = null;
     [Header("ÃÑ¾Ë°ú ÆøÅº Ä«¿îÆ®")]
-    public int power;
-    public int bomb;
+    public static int power;
+    public static int bomb;
 
     void Start()
     {

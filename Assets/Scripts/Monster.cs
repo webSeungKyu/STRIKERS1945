@@ -49,7 +49,6 @@ public class Monster : MonoBehaviour
             {
                 Destroy(gameObject);
                 int ran = Random.Range(0, 4);
-                Debug.Log(ran);
                 if (ran == 3)
                 {
                     Instantiate(items[Random.Range(0, items.Count)]);
