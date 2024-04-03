@@ -11,7 +11,10 @@ public class Player : MonoBehaviour
     [Header("ÃÑ¾Ë°ú ¹ß»ç À§Ä¡")]
     public GameObject bullet;
     public Transform pos = null;
-    
+    [Header("ÃÑ¾Ë°ú ÆøÅº Ä«¿îÆ®")]
+    public int power;
+    public int bomb;
+
     void Start()
     {
         animator = GetComponent<Animator>();
