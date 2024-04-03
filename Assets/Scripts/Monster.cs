@@ -9,6 +9,7 @@ public class Monster : MonoBehaviour
     public Transform pos1;
     public Transform pos2;
     public GameObject bullet;
+    public List<GameObject> items;
     void Start()
     {
         //한 번 함수 호출
