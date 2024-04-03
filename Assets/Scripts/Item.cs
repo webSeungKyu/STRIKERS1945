@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+
     public float moveSpeed = 1f;
     Vector2 randomMove;
 
@@ -25,6 +26,7 @@ public class Item : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        #region º®¿¡ ´êÀ¸¸é Æ¨±â±â
         if (collision.tag == "LRWall")
         {
             randomMove.x = randomMove.x * -1;
@@ -33,7 +35,7 @@ public class Item : MonoBehaviour
         {
             randomMove.y = randomMove.y * -1;
         }
-
+        #endregion
     }
 
 
