@@ -4,10 +4,24 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    public float moveSpeed = 3;
+    public float moveSpeed = 1;
+    public float delay = 3f;
+    public Transform pos1;
+    public Transform pos2;
+    public GameObject bullet;
     void Start()
     {
-        
+        //한 번 함수 호출
+        Invoke("CreateBullet", delay);
+    }
+
+    void CreateBullet()
+    {
+        Instantiate(bullet, pos1.position, Quaternion.identity);
+        Instantiate(bullet, pos2.position, Quaternion.identity);
+
+        //재귀호출
+        Invoke("CreateBullet", delay);
     }
 
 
