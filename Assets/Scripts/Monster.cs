@@ -10,6 +10,7 @@ public class Monster : MonoBehaviour
     public Transform pos2;
     public GameObject bullet;
     public List<GameObject> items;
+    public int MonsterHp;
     void Start()
     {
         //한 번 함수 호출
@@ -36,5 +37,25 @@ public class Monster : MonoBehaviour
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "PBullet")
+        {
+            Destroy(collision.gameObject);
+            MonsterHp--;
+            if (MonsterHp <= 0)
+            {
+                Destroy(gameObject);
+                int ran = Random.Range(0, 4);
+                Debug.Log(ran);
+                if (ran == 3)
+                {
+                    Instantiate(items[Random.Range(0, items.Count)]);
+                }
+            }
+        }
+
     }
 }
