@@ -15,8 +15,13 @@ public class Player : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        InvokeRepeating("ShotBullet", 1f, 0.1f);
     }
 
+    void ShotBullet()
+    {
+        Instantiate(bullet, pos.position, Quaternion.identity);
+    }
     
     void Update()
     {
