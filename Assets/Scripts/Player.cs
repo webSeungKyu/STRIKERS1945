@@ -8,6 +8,10 @@ public class Player : MonoBehaviour
 
     Animator animator;
 
+    [Header("총알과 발사 위치")]
+    public GameObject bullet;
+    public Transform pos = null;
+    
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -47,6 +51,13 @@ public class Player : MonoBehaviour
             animator.SetBool("up", false);
         }
 
+        #region 총알 발사
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //프리팹 위치 방향 생성
+            Instantiate(bullet, pos.position, Quaternion.identity);
+        }
+        #endregion
 
         transform.Translate(moveX, moveY, 0);
         #endregion
@@ -59,5 +70,7 @@ public class Player : MonoBehaviour
         Vector3 worldPos = Camera.main.ViewportToWorldPoint(viewPos);//다시월드좌표로 변환
         transform.position = worldPos; //좌표를 적용한다.
         #endregion
+
+
     }
 }
