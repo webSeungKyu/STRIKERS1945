@@ -10,7 +10,7 @@ public class Monster : MonoBehaviour
     public Transform pos2;
     public GameObject bullet;
     public List<GameObject> items;
-    public int MonsterHp;
+    public int monsterHp = 100;
     void Start()
     {
         //한 번 함수 호출
@@ -37,6 +37,21 @@ public class Monster : MonoBehaviour
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="damage">int 데미지 </param>
+    public void Attack(int damage)
+    {
+        monsterHp -= damage;
+
+        if(monsterHp <= 0)
+        {
+            ItemDrop();
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>
