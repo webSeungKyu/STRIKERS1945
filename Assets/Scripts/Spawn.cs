@@ -9,13 +9,17 @@ public class Spawn : MonoBehaviour
     public float endX = 2;
     [Header("몬스터 생성 시간")]
     public float startTime = 1;
-    public float endTime = 20;
+    public float endTime = 10;
     //public List<GameObject> monsterList;
 
-    [Header("몬스터와 생성 스위치")]
-    [SerializeField] private GameObject monster;
+    [Header("생성 스위치")]
     public bool spawnSwitch = true;
-    
+    public bool spawnSwitch2 = true;
+    [Header("몬스터")]
+    [SerializeField] private GameObject monster;
+    [SerializeField] private GameObject monster2;
+
+
     void Start()
     {
         StartCoroutine("RandomSpawn");
@@ -36,12 +40,36 @@ public class Spawn : MonoBehaviour
         }
     }
 
+    IEnumerator RandomSpawn2()
+    {
+        while (spawnSwitch2)
+        {
+            yield return new WaitForSeconds(startTime +2);
+            float x = Random.Range(startX, endX);
+            Vector2 r = new Vector2(x, transform.position.y);
+
+            //몬스터 생성
+            Instantiate(monster2, r, Quaternion.identity);
+        }
+    }
+
     void StopSpawn()
     {
         spawnSwitch = false;
         StopCoroutine("RandomSpawn");
 
         //두 번째 몬스터
+        StartCoroutine("RandomSpawn2");
+        Invoke("StopSpawn2", endTime);
+
+    }
+
+    void StopSpawn2()
+    {
+        spawnSwitch2 = false;
+        StopCoroutine("RandomSpawn2");
+
+        //보스 몬스터
     }
     
 
