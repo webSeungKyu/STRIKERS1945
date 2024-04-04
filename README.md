@@ -22,3 +22,8 @@
 
 [ Bounciness ]
  - 탄성 : 0과 1사이 > 0이면 바운스하지 않고 1이면 에너지 손실 없이 바운스
+
+< 레이어 기반 충돌 감지 (유니티 공식 문서) >
+ - Edit > Project Settings > Physices 2D > Layer Collision Matrix
+ - 예를 들어 레이어 1이 레이어 2, 3과 충돌하고 레이어 1과 충돌하지 않게 하려면
+ - Layer 1 행을 찾은 다음 Layer 2 및 Layer 3 열의 상자를 선택하고 Layer 1 열의 체크박스는 비워 두어야 합니다.
