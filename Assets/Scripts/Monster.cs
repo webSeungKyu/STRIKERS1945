@@ -39,7 +39,19 @@ public class Monster : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    /// <summary>
+    /// 죽으면 아이템 생성 ( 확률 25% )
+    /// </summary>
+    public void ItemDrop()
+    {
+        int ran = Random.Range(0, 4);
+        if (ran == 3)
+        {
+            Instantiate(items[Random.Range(0, items.Count)]);
+        }
+    }
+    #region 주석 처리 후 플레이어 총알 스크립트에 구현함
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "PBullet")
         {
@@ -56,5 +68,6 @@ public class Monster : MonoBehaviour
             }
         }
 
-    }
+    }*/
+    #endregion
 }
