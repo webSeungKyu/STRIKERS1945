@@ -45,7 +45,7 @@ public class Spawn : MonoBehaviour
         while (spawnSwitch2)
         {
             yield return new WaitForSeconds(startTime +2);
-            float x = Random.Range(startX, endX);
+            float x = Random.Range(-1.3f, 1.3f);//몬스터2가 커서 임의로 위치 조정
             Vector2 r = new Vector2(x, transform.position.y);
 
             //몬스터 생성
