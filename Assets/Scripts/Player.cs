@@ -9,11 +9,15 @@ public class Player : MonoBehaviour
     Animator animator;
 
     [Header("총알과 발사 위치")]
-    public GameObject bullet;
+    //public List<GameObject> bullet;
+    public List<GameObject> bullet = new List<GameObject>();//미리 할당
+
     public Transform pos = null;
     [Header("총알과 폭탄 카운트")]
-    public static int power;
-    public static int bomb;
+    public static int power = 0;
+    public static int bomb = 0;
+
+
 
     void Start()
     {
@@ -23,7 +27,7 @@ public class Player : MonoBehaviour
 
     void ShotBullet()
     {
-        Instantiate(bullet, pos.position, Quaternion.identity);
+        Instantiate(bullet[power], pos.position, Quaternion.identity);
     }
     
     void Update()
@@ -63,7 +67,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //프리팹 위치 방향 생성
-            Instantiate(bullet, pos.position, Quaternion.identity);
+            Instantiate(bullet[power], pos.position, Quaternion.identity);
         }
         #endregion
 
@@ -81,4 +85,23 @@ public class Player : MonoBehaviour
 
 
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Power"))
+        {
+            power += 1;
+
+            if(power >= 3)
+            {
+                power = 3;
+            }
+
+            Destroy(collision.gameObject);
+        }
+        if (collision.CompareTag("Bomb"))
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+
 }
