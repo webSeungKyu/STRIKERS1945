@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PBullet : MonoBehaviour
 {
-    public float Speed = 4.0f;
+    public float Speed = 6f;
 
 
     void Start()
@@ -23,5 +23,24 @@ public class PBullet : MonoBehaviour
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Monster"))
+        {
+            //아이템 생성
+            collision.gameObject.GetComponent<Monster>().ItemDrop();
+            //몬스터 삭제
+            Destroy(collision.gameObject);
+            //데미지 주기
+
+            //이펙트 생성
+
+            //총알 삭제
+            Destroy(gameObject);
+
+
+        }
     }
 }
