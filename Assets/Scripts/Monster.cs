@@ -11,10 +11,15 @@ public class Monster : MonoBehaviour
     public GameObject bullet;
     public List<GameObject> items;
     public int monsterHp = 100;
+    private Color originalColor;
+    private SpriteRenderer spriteRenderer;
     void Start()
     {
         //한 번 함수 호출
         Invoke("CreateBullet", delay);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
+
     }
 
     void CreateBullet()
@@ -40,11 +45,12 @@ public class Monster : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// 공격을 받으면 체력 감소
     /// </summary>
     /// <param name="damage">int 데미지 </param>
     public void Attack(int damage)
     {
+        StartCoroutine("ChangeColor");
         monsterHp -= damage;
 
         if(monsterHp <= 0)
@@ -52,6 +58,13 @@ public class Monster : MonoBehaviour
             ItemDrop();
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator ChangeColor()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        spriteRenderer.color = originalColor;
     }
 
     /// <summary>
