@@ -5,6 +5,7 @@ using UnityEngine;
 public class PBullet : MonoBehaviour
 {
     public float Speed = 6f;
+    public int damage = 10;
 
 
     void Start()
@@ -29,11 +30,13 @@ public class PBullet : MonoBehaviour
     {
         if(collision.CompareTag("Monster"))
         {
-            //아이템 생성
+            /*//아이템 생성
             collision.gameObject.GetComponent<Monster>().ItemDrop();
             //몬스터 삭제
-            Destroy(collision.gameObject);
+            Destroy(collision.gameObject);*/
+
             //데미지 주기
+            collision.gameObject.GetComponent<Monster>().Attack(damage);
 
             //이펙트 생성
 
