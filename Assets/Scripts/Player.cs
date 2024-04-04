@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     [Header("¾ÆÀÌÅÛ È¹µæ ÀÌ¹ÌÁö")]
     public GameObject powerUpEffect;
     public GameObject powerUpMaxEffect;
+    public GameObject bombUpEffect;
 
 
 
@@ -107,6 +108,12 @@ public class Player : MonoBehaviour
         }
         if (collision.CompareTag("Bomb"))
         {
+            bomb += 1;
+            StartCoroutine("EffectBomb", bomb);
+            if (bomb >= 5)
+            {
+                bomb = 5;
+            }
             Destroy(collision.gameObject);
         }
     }
@@ -122,9 +129,15 @@ public class Player : MonoBehaviour
         {
             powerUpEffectNew = Instantiate(powerUpEffect, transform.position, Quaternion.identity);
         }
-            
+
         yield return new WaitForSeconds(1f);
         Destroy(powerUpEffectNew);
+    }
+    IEnumerator EffectBomb(int bomb)
+    {
+        GameObject bombUpEffectNew = Instantiate(bombUpEffect, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(1f);
+        Destroy(bombUpEffectNew);
     }
 
 }
