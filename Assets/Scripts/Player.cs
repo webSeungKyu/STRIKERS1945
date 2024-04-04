@@ -14,8 +14,13 @@ public class Player : MonoBehaviour
 
     public Transform pos = null;
     [Header("ÃÑ¾Ë°ú ÆøÅº Ä«¿îÆ®")]
-    public static int power = 0;
-    public static int bomb = 0;
+    public int power = 0;
+    public int bomb = 0;
+    [Header("¾ÆÀÌÅÛ È¹µæ ÀÌ¹ÌÁö")]
+    public GameObject powerUpEffect;
+
+
+
 
 
 
@@ -90,7 +95,7 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("Power"))
         {
             power += 1;
-
+            StartCoroutine("EffectPower");
             if(power >= 3)
             {
                 power = 3;
@@ -102,6 +107,13 @@ public class Player : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
+    }
+
+    IEnumerator EffectPower()
+    {
+        GameObject powerUpEffectNew = Instantiate(powerUpEffect, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(1f);
+        Destroy(powerUpEffectNew);
     }
 
 }

@@ -160,6 +160,9 @@ MonoBehaviour:
   - {fileID: 3637127718395549382, guid: 18881cdd89ae16643b836da473686b4a, type: 3}
   - {fileID: 3637127718395549382, guid: 3c13069c7c23fef4bb74dce95863c797, type: 3}
   pos: {fileID: 312525493098077271}
+  power: 0
+  bomb: 0
+  powerUpEffect: {fileID: 8837053048341796082, guid: 4d8fca6c54d9fd34fa45bd8d7294f436, type: 3}
 --- !u!50 &4783456546382138651
 Rigidbody2D:
   serializedVersion: 4
