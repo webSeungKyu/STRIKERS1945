@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
     public int bomb = 0;
     [Header("¾ÆÀÌÅÛ È¹µæ ÀÌ¹ÌÁö")]
     public GameObject powerUpEffect;
+    public GameObject powerUpMaxEffect;
 
 
 
@@ -95,7 +97,7 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("Power"))
         {
             power += 1;
-            StartCoroutine("EffectPower");
+            StartCoroutine("EffectPower", power);
             if(power >= 3)
             {
                 power = 3;
@@ -109,9 +111,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    IEnumerator EffectPower()
+    IEnumerator EffectPower(int power)
     {
-        GameObject powerUpEffectNew = Instantiate(powerUpEffect, transform.position, Quaternion.identity);
+        GameObject powerUpEffectNew;
+        if (power >= 3)
+        {
+            powerUpEffectNew = Instantiate(powerUpMaxEffect, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            powerUpEffectNew = Instantiate(powerUpEffect, transform.position, Quaternion.identity);
+        }
+            
         yield return new WaitForSeconds(1f);
         Destroy(powerUpEffectNew);
     }
