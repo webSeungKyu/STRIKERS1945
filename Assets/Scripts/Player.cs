@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -17,11 +18,15 @@ public class Player : MonoBehaviour
     [Header("총알과 폭탄 카운트")]
     public int power = 0;
     public int bomb = 0;
-    [Header("아이템 획득 이미지")]
+    [Header("아이템 획득 이펙트")]
     public GameObject powerUpEffect;
     public GameObject powerUpMaxEffect;
     public GameObject bombUpEffect;
-
+    [Header("에너지 폭탄 UI")]
+    public Image imageBoom;
+    public List<Sprite> imageEnergys = new List<Sprite>();//미리 할당
+    public List<Sprite> imageBooms = new List<Sprite>();//미리 할당
+    
 
 
 
@@ -37,14 +42,14 @@ public class Player : MonoBehaviour
     {
         Instantiate(bullet[power], pos.position, Quaternion.identity);
     }
-    
+
     void Update()
     {
         #region 움직임 및 애니메이션
         float moveX = moveSpeed * Time.deltaTime * Input.GetAxis("Horizontal");
         float moveY = moveSpeed * Time.deltaTime * Input.GetAxis("Vertical");
 
-        if(Input.GetAxis("Horizontal") <= -0.5f)
+        if (Input.GetAxis("Horizontal") <= -0.5f)
         {
             animator.SetBool("left", true);
         }
@@ -92,6 +97,7 @@ public class Player : MonoBehaviour
         #endregion
 
 
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -99,7 +105,7 @@ public class Player : MonoBehaviour
         {
             power += 1;
             StartCoroutine("EffectPower", power);
-            if(power >= 3)
+            if (power >= 3)
             {
                 power = 3;
             }
@@ -108,7 +114,22 @@ public class Player : MonoBehaviour
         }
         if (collision.CompareTag("Bomb"))
         {
+
             bomb += 1;
+            switch (bomb)
+            {
+                case 0:
+                    imageBoom.color = new Color(255, 255, 255, 0);
+                     break;
+                case 1:
+                    imageBoom.color = new Color(255, 255, 255, 255);
+                    imageBoom.sprite = imageBooms[0];
+                    break;
+                case 2: imageBoom.sprite = imageBooms[1]; break;
+                case 3: imageBoom.sprite = imageBooms[2]; break;
+                case 4: imageBoom.sprite = imageBooms[3]; break;
+                case 5: imageBoom.sprite = imageBooms[4]; break;
+            }
             StartCoroutine("EffectBomb", bomb);
             if (bomb >= 5)
             {
