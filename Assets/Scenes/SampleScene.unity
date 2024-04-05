@@ -402,7 +402,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &505036235
 Animator:
   serializedVersion: 5
@@ -1663,7 +1663,7 @@ PrefabInstance:
       objectReference: {fileID: 8898760509187764588, guid: 620a3d97e221c504db1326954c3ce8a8, type: 3}
     - target: {fileID: 1531820662762655110, guid: d9c79ae6bdb73584e87b6308ee94afd4, type: 3}
       propertyPath: specialBullet.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1531820662762655110, guid: d9c79ae6bdb73584e87b6308ee94afd4, type: 3}
       propertyPath: imageEnergys.Array.data[0]
@@ -1685,6 +1685,10 @@ PrefabInstance:
       propertyPath: specialBullet.Array.data[0]
       value: 
       objectReference: {fileID: 1102639615276994545, guid: d695df7761ed83b4987196dbf1b8729f, type: 3}
+    - target: {fileID: 1531820662762655110, guid: d9c79ae6bdb73584e87b6308ee94afd4, type: 3}
+      propertyPath: specialBullet.Array.data[1]
+      value: 
+      objectReference: {fileID: 2306501433119961725, guid: 6350fe8549b2d954b99a3984684bbe99, type: 3}
     - target: {fileID: 1737318583776266441, guid: d9c79ae6bdb73584e87b6308ee94afd4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1989,7 +1993,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7815350588024098668, guid: 5b5836738bc6a7c48ad827d223197a10, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

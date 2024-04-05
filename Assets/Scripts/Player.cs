@@ -32,14 +32,33 @@ public class Player : MonoBehaviour
 
 
 
-
+    public bool startShot = true;
     void Start()
     {
         sliderEnergy.value = 0;
         animator = GetComponent<Animator>();
-        InvokeRepeating("ShotBullet", 1f, 0.1f);
+        //InvokeRepeating("ShotBullet", 1f, 0.1f);
         InvokeRepeating("EnergyUp", 1f, 1f);
+        StartCoroutine("ShotBulletCoroutine");
     }
+    
+    IEnumerator ShotBulletCoroutine()
+    {
+        while (startShot) 
+        {
+            yield return new WaitForSeconds(0.1f);
+            Instantiate(bullet[power], pos.position, Quaternion.identity);
+        }
+    }
+
+    void StartShot()
+    {
+        startShot = true;
+        StartCoroutine("ShotBulletCoroutine");
+    }
+    
+
+
 
     void EnergyUp()
     {
@@ -80,16 +99,18 @@ public class Player : MonoBehaviour
         #region 필살기
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("필살기 시도!");
             if (energyLv == 4)
             {
-                Debug.Log("MAX 필살기 발사!!");
                 energyLv = 1;
+                GameObject newSpecialBullet = Instantiate(specialBullet[1], pos.position, Quaternion.identity);
                 sliderEnergy.GetComponentInChildren<CanvasRenderer>().GetComponent<Image>().sprite = imageEnergys[0];
+                
+                startShot = false;//기본 총알 발사 끄기
+                Invoke("StartShot", 9.7f);
+                Destroy(newSpecialBullet, 9.7f);
             }
             else if (energyLv > 1 && energyLv <= 3)
             {
-                Debug.Log("일반 필살기 발사!");
                 energyLv = 1;
                 GameObject newSpecialBullet = Instantiate(specialBullet[0], pos.position, Quaternion.identity);
                 sliderEnergy.GetComponentInChildren<CanvasRenderer>().GetComponent<Image>().sprite = imageEnergys[0];
