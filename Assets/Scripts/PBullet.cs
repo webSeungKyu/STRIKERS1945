@@ -45,5 +45,10 @@ public class PBullet : MonoBehaviour
 
 
         }
+
+        if (collision.CompareTag("Boss"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
