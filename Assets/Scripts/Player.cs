@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     [Header("총알과 발사 위치")]
     //public List<GameObject> bullet;
     public List<GameObject> bullet = new List<GameObject>();//미리 할당
-
+    public List<GameObject> specialBullet = new List<GameObject>();//미리 할당
     public Transform pos = null;
     [Header("총알과 폭탄 카운트")]
     public int power = 0;
@@ -77,6 +77,28 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        #region 필살기
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("필살기 시도!");
+            if (energyLv == 4)
+            {
+                Debug.Log("MAX 필살기 발사!!");
+                energyLv = 1;
+                sliderEnergy.GetComponentInChildren<CanvasRenderer>().GetComponent<Image>().sprite = imageEnergys[0];
+            }
+            else if (energyLv > 1 && energyLv <= 3)
+            {
+                Debug.Log("일반 필살기 발사!");
+                energyLv = 1;
+                GameObject newSpecialBullet = Instantiate(specialBullet[0], pos.position, Quaternion.identity);
+                sliderEnergy.GetComponentInChildren<CanvasRenderer>().GetComponent<Image>().sprite = imageEnergys[0];
+
+            }
+
+        }
+        #endregion
+
         #region 움직임 및 애니메이션
         float moveX = moveSpeed * Time.deltaTime * Input.GetAxis("Horizontal");
         float moveY = moveSpeed * Time.deltaTime * Input.GetAxis("Vertical");
@@ -116,28 +138,7 @@ public class Player : MonoBehaviour
         }
         #endregion*/
         
-        #region 필살기
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("필살기 시도!");
-            if (energyLv == 4)
-            {
-                Debug.Log("MAX 필살기 발사!!");
-                energyLv = 1;
-                sliderEnergy.GetComponentInChildren<CanvasRenderer>().GetComponent<Image>().sprite = imageEnergys[0];
-            }else if(energyLv > 1 && energyLv <= 3)
-            {
-            Debug.Log("일반 필살기 발사!");
-                energyLv = 1;
-                sliderEnergy.GetComponentInChildren<CanvasRenderer>().GetComponent<Image>().sprite = imageEnergys[0];
-            }
-            
 
-
-            
-            //Instantiate(bullet[power], pos.position, Quaternion.identity);
-        }
-        #endregion
 
 
         transform.Translate(moveX, moveY, 0);
