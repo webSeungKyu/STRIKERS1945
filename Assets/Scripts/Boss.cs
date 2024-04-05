@@ -46,7 +46,7 @@ public class Boss : MonoBehaviour
 
                 //발사체 이동 방향(각도)
                 float angle = weightAngle + intervalAngle * i;
-                //발사체 이동 방향(벡터)
+                //발사체 이동 방향(벡터) 
                 //Cos(각도)라디안 단위의 각도 표현을 위해 pi / 180을 곱함
                 float x = Mathf.Cos(angle * Mathf.Deg2Rad);
                 //SIn(각도)라디안 단위의 각도 표현을 위해 pi / 100을 곱함

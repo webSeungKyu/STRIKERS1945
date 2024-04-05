@@ -23,10 +23,11 @@ public class Player : MonoBehaviour
     public GameObject powerUpMaxEffect;
     public GameObject bombUpEffect;
     [Header("에너지 폭탄 UI")]
+    public Slider sliderEnergy;
     public Image imageBoom;
     public List<Sprite> imageEnergys = new List<Sprite>();//미리 할당
     public List<Sprite> imageBooms = new List<Sprite>();//미리 할당
-    
+    int energyLv = 1;
 
 
 
@@ -34,8 +35,39 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        sliderEnergy.value = 0;
         animator = GetComponent<Animator>();
         InvokeRepeating("ShotBullet", 1f, 0.1f);
+        InvokeRepeating("EnergyUp", 1f, 1f);
+    }
+
+    void EnergyUp()
+    {
+        if(energyLv < 4)
+        {
+            sliderEnergy.value += 25;
+        }
+        
+
+        if(energyLv == 1 && sliderEnergy.value >= 100)
+        {
+            Debug.Log("에너지 레벨업");
+            energyLv++;
+            sliderEnergy.GetComponentInChildren<CanvasRenderer>().GetComponent<Image>().sprite = imageEnergys[1];
+            sliderEnergy.value = 0;
+        }else if (energyLv == 2 && sliderEnergy.value >= 100)
+        {
+            energyLv++;
+            sliderEnergy.GetComponentInChildren<CanvasRenderer>().GetComponent<Image>().sprite = imageEnergys[2];
+            sliderEnergy.value = 0;
+        }
+        else if (energyLv == 3 && sliderEnergy.value >= 100)
+        {
+            energyLv++;
+            sliderEnergy.GetComponentInChildren<CanvasRenderer>().GetComponent<Image>().sprite = imageEnergys[3];
+            sliderEnergy.value = 0;
+        }
+
     }
 
     void ShotBullet()
@@ -76,13 +108,37 @@ public class Player : MonoBehaviour
             animator.SetBool("up", false);
         }
 
-        #region 총알 발사
+/*        #region 총알 발사
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //프리팹 위치 방향 생성
             Instantiate(bullet[power], pos.position, Quaternion.identity);
         }
+        #endregion*/
+        
+        #region 필살기
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("필살기 시도!");
+            if (energyLv == 4)
+            {
+                Debug.Log("MAX 필살기 발사!!");
+                energyLv = 1;
+                sliderEnergy.GetComponentInChildren<CanvasRenderer>().GetComponent<Image>().sprite = imageEnergys[0];
+            }else if(energyLv > 1 && energyLv <= 3)
+            {
+            Debug.Log("일반 필살기 발사!");
+                energyLv = 1;
+                sliderEnergy.GetComponentInChildren<CanvasRenderer>().GetComponent<Image>().sprite = imageEnergys[0];
+            }
+            
+
+
+            
+            //Instantiate(bullet[power], pos.position, Quaternion.identity);
+        }
         #endregion
+
 
         transform.Translate(moveX, moveY, 0);
         #endregion

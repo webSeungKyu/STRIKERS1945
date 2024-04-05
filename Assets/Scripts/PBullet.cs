@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PBullet : MonoBehaviour
 {
     public float Speed = 6f;
     public int damage = 10;
+    public GameObject effect;
+    public GameObject effect2;
 
 
     void Start()
@@ -39,7 +42,8 @@ public class PBullet : MonoBehaviour
             collision.gameObject.GetComponent<Monster>().Attack(damage);
 
             //ÀÌÆåÆ® »ý¼º
-
+            GameObject newEffect = Instantiate(effect, transform.position, Quaternion.identity);
+            Destroy(newEffect, 1.119f);
             //ÃÑ¾Ë »èÁ¦
             Destroy(gameObject);
 
@@ -48,6 +52,8 @@ public class PBullet : MonoBehaviour
 
         if (collision.CompareTag("Boss"))
         {
+            GameObject newEffect = Instantiate(effect2, transform.position, Quaternion.identity);
+            Destroy(newEffect, 1.119f);
             Destroy(gameObject);
         }
     }
