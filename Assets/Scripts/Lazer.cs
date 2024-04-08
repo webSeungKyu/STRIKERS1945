@@ -23,6 +23,7 @@ public class Lazer : MonoBehaviour
 
             collision.gameObject.GetComponent<Monster>().Attack(200);
             GameObject newEffect = Instantiate(effect, collision.transform.position, Quaternion.identity);
+            Destroy(newEffect, 0.42f);
 
 
 
@@ -31,6 +32,7 @@ public class Lazer : MonoBehaviour
         if (collision.CompareTag("Boss"))
         {
             GameObject newEffect = Instantiate(effect, collision.transform.position, Quaternion.identity);
+            Destroy(newEffect, 0.42f);
         }
     }
 }
