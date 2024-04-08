@@ -147,6 +147,7 @@ public class Player : MonoBehaviour
     }*/
     void Update()
     {
+        Debug.Log(bomb);
         if (helpOnOff)
         {
             helpBar.fillAmount += Time.deltaTime * 0.119f;
@@ -188,8 +189,15 @@ public class Player : MonoBehaviour
                 
 
             }
-            else if (energyLv > 1 && energyLv <= 3)
-            {
+            else if (energyLv > 1 && energyLv <= 3 && bomb > 0)
+            {   
+
+                bomb--;
+                if(bomb < 0)
+                {
+                    bomb = 0;
+                }
+                StartCoroutine("BombCheck", bomb);
                 energyLv = 1;
                 GameObject newSpecialBullet = Instantiate(specialBullet[0], pos.position, Quaternion.identity);
                 sliderEnergy.GetComponentInChildren<CanvasRenderer>().GetComponent<Image>().sprite = imageEnergys[0];
@@ -273,29 +281,35 @@ public class Player : MonoBehaviour
         }
         if (collision.CompareTag("Bomb"))
         {
-
+            
             bomb += 1;
-            switch (bomb)
-            {
-                case 0:
-                    imageBoom.color = new Color(255, 255, 255, 0);
-                     break;
-                case 1:
-                    imageBoom.color = new Color(255, 255, 255, 255);
-                    imageBoom.sprite = imageBooms[0];
-                    break;
-                case 2: imageBoom.sprite = imageBooms[1]; break;
-                case 3: imageBoom.sprite = imageBooms[2]; break;
-                case 4: imageBoom.sprite = imageBooms[3]; break;
-                case 5: imageBoom.sprite = imageBooms[4]; break;
-            }
+            
             StartCoroutine("EffectBomb", bomb);
+            StartCoroutine("BombCheck", bomb);
             if (bomb >= 5)
             {
                 bomb = 5;
             }
             Destroy(collision.gameObject);
         }
+    }
+    IEnumerator BombCheck(int _bomb)
+    {
+        switch (_bomb)
+        {
+            case 0:
+                imageBoom.color = new Color(255, 255, 255, 0);
+                break;
+            case 1:
+                imageBoom.color = new Color(255, 255, 255, 255);
+                imageBoom.sprite = imageBooms[0];
+                break;
+            case 2: imageBoom.sprite = imageBooms[1]; break;
+            case 3: imageBoom.sprite = imageBooms[2]; break;
+            case 4: imageBoom.sprite = imageBooms[3]; break;
+            case 5: imageBoom.sprite = imageBooms[4]; break;
+        }
+        yield return null;
     }
 
     IEnumerator EffectPower(int power)
