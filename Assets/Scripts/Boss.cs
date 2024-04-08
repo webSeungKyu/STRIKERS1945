@@ -14,8 +14,14 @@ public class Boss : MonoBehaviour
 
     void Start()
     {
+        Invoke("Hide", 1.19f);
         StartCoroutine("BossMissile");
         StartCoroutine("BossCircleMissile");
+    }
+
+    void Hide()
+    {
+        GameObject.Find("BossWarning").SetActive(false);
     }
 
     IEnumerator BossMissile()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Lazer : MonoBehaviour
 {
     GameObject player;
-    public GameObject effect;
+    public List<GameObject> effect;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -22,7 +22,7 @@ public class Lazer : MonoBehaviour
         {
 
             collision.gameObject.GetComponent<Monster>().Attack(200);
-            GameObject newEffect = Instantiate(effect, collision.transform.position, Quaternion.identity);
+            GameObject newEffect = Instantiate(effect[0], collision.transform.position, Quaternion.identity);
             Destroy(newEffect, 0.42f);
 
 
@@ -31,8 +31,15 @@ public class Lazer : MonoBehaviour
 
         if (collision.CompareTag("Boss"))
         {
-            GameObject newEffect = Instantiate(effect, collision.transform.position, Quaternion.identity);
+            GameObject newEffect = Instantiate(effect[1], collision.transform.position, Quaternion.identity);
             Destroy(newEffect, 0.42f);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("MBullet"))
+        {
+            Destroy(collision.gameObject);
         }
     }
 }

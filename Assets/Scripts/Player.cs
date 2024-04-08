@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,8 +30,31 @@ public class Player : MonoBehaviour
     public List<Sprite> imageBooms = new List<Sprite>();//미리 할당
     int energyLv = 1;
 
+    int helperLv = 0;
+    public Image helpBar;
+    public bool helpOnOff = true;
+    public GameObject help1;
+    public GameObject help2;
+    
 
 
+    private void Awake()
+    {
+        StartCoroutine("HelpOff");
+    }
+
+    IEnumerator HelpOff()
+    {
+        if (energyLv == 4)
+        {
+            helperLv = 0;
+        }
+        help1.SetActive(false);
+        help2.SetActive(false);
+        helpBar.fillAmount = 0;
+
+            yield return null;
+    }
 
     public bool startShot = true;
     void Start()
@@ -70,7 +94,6 @@ public class Player : MonoBehaviour
 
         if(energyLv == 1 && sliderEnergy.value >= 100)
         {
-            Debug.Log("에너지 레벨업");
             energyLv++;
             sliderEnergy.GetComponentInChildren<CanvasRenderer>().GetComponent<Image>().sprite = imageEnergys[1];
             sliderEnergy.value = 0;
@@ -94,13 +117,67 @@ public class Player : MonoBehaviour
         Instantiate(bullet[power], pos.position, Quaternion.identity);
     }
 
+    /*IEnumerator CheckHelpLv(int lv)
+    {
+        switch (lv)
+        {
+            case 0: break;
+            case 1:
+                help1.SetActive(true);
+                helpBar.fillAmount = 0;
+                help1.GetComponent<Helper>().atkOnOff = true;
+                help1.GetComponent<SpriteRenderer>().color = Color.red;
+                GameObject helper1PowerUp = Instantiate(powerUpMaxEffect, transform.position, Quaternion.identity);
+                yield return new WaitForSeconds(1f);
+                Destroy(helper1PowerUp);
+                break;
+            case 2:
+                help2.SetActive(true);
+                helpBar.fillAmount = 0;
+                help2.GetComponent<Helper>().atkOnOff = true;
+                help2.GetComponent<SpriteRenderer>().color = Color.red;
+                GameObject helper2PowerUp = Instantiate(powerUpMaxEffect, help2.transform.position, Quaternion.identity);
+                yield return new WaitForSeconds(1f);
+                Destroy(helper2PowerUp);
+                break;
+            default: break;
+        }
+
+        yield return null;
+    }*/
     void Update()
     {
+        if (helpOnOff)
+        {
+            helpBar.fillAmount += Time.deltaTime * 0.119f;
+
+            if (helperLv == 2 && helpBar.fillAmount == 1)
+            {
+                helperLv++;
+            }
+            else if (helperLv == 1 && helpBar.fillAmount == 1)
+            {
+                helperLv++;
+                help2.SetActive(true);
+                helpBar.fillAmount = 0;
+                help2.GetComponent<Helper>().atkOnOff = true;
+            }
+            else if (helperLv == 0 && helpBar.fillAmount == 1)
+            {
+                helperLv++;
+                help1.SetActive(true);
+                helpBar.fillAmount = 0;
+                help1.GetComponent<Helper>().atkOnOff = true;
+            }
+        }
+        
+
         #region 필살기
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (energyLv == 4)
             {
+                StartCoroutine(HelpOff());
                 energyLv = 1;
                 GameObject newSpecialBullet = Instantiate(specialBullet[1], pos.position, Quaternion.identity);
                 sliderEnergy.GetComponentInChildren<CanvasRenderer>().GetComponent<Image>().sprite = imageEnergys[0];
@@ -108,6 +185,8 @@ public class Player : MonoBehaviour
                 startShot = false;//기본 총알 발사 끄기
                 Invoke("StartShot", 9.7f);
                 Destroy(newSpecialBullet, 9.7f);
+                
+
             }
             else if (energyLv > 1 && energyLv <= 3)
             {
@@ -119,6 +198,8 @@ public class Player : MonoBehaviour
 
         }
         #endregion
+
+
 
         #region 움직임 및 애니메이션
         float moveX = moveSpeed * Time.deltaTime * Input.GetAxis("Horizontal");

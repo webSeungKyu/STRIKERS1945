@@ -11,6 +11,9 @@ TagManager:
   - Bomb
   - Monster
   - Boss
+  - MBullet
+  - Helper1
+  - Helper2
   layers:
   - Default
   - TransparentFX

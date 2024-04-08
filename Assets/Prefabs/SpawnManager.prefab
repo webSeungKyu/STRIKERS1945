@@ -52,3 +52,5 @@ MonoBehaviour:
   spawnSwitch2: 1
   monster: {fileID: 6614596815073293384, guid: c789b0b085babf34b846c01c213799a6, type: 3}
   monster2: {fileID: 1379047602037006422, guid: f088897ab4ec0fc45b21bd9ccd40a23d, type: 3}
+  boss: {fileID: 8229219400197078329, guid: dbb01d4d51577154a8ca81759c2b6dcc, type: 3}
+  textBossWarning: {fileID: 0}

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Spawn : MonoBehaviour
 {
@@ -18,8 +20,14 @@ public class Spawn : MonoBehaviour
     [Header("몬스터")]
     [SerializeField] private GameObject monster;
     [SerializeField] private GameObject monster2;
+    [SerializeField] private GameObject boss;
 
+    [SerializeField] GameObject textBossWarning;
 
+    private void Awake()
+    {
+        textBossWarning.SetActive(false);
+    }
     void Start()
     {
         StartCoroutine("RandomSpawn");
@@ -70,8 +78,16 @@ public class Spawn : MonoBehaviour
         StopCoroutine("RandomSpawn2");
 
         //보스 몬스터
+        textBossWarning.SetActive(true);
+        Vector3 pos = new Vector3(0, 3.05f, 0);
+        StartCoroutine(BossPush(pos));
     }
     
+    IEnumerator BossPush(Vector3 pos)
+    {
+        yield return new WaitForSecondsRealtime(4.2f);
+        Instantiate(boss, pos, Quaternion.identity);
+    }
 
 
     void Update()

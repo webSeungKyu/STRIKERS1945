@@ -29,20 +29,19 @@ public class SpecialBullet : MonoBehaviour
         {
             collision.gameObject.GetComponent<Monster>().Attack(damage);
             GameObject newEffect = Instantiate(effect, transform.position, Quaternion.identity);
-            Destroy(newEffect, 1f);
-            Destroy(gameObject);
+            Destroy(newEffect, 0.42f);
+            Destroy(gameObject, 0.42f);
         }
         if (collision.CompareTag("Boss"))
         {
             GameObject newEffect = Instantiate(effect, transform.position, Quaternion.identity);
-            StartCoroutine("EffectCoroutine", newEffect);
-            newEffect.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0);
             Destroy(newEffect, 0.42f);
             Destroy(gameObject, 0.42f);
         }
 
     }
 
+    //Magic_Elecs ÇÁ¸®ÆÕ Àü¿ë ÀÌÆåÆ®
     IEnumerator EffectCoroutine(GameObject gameObject)
     {
         GameObject newEffect1 = Instantiate(gameObject, new Vector3(transform.position.x + 0.42f, transform.position.y + 0.42f, 0), Quaternion.identity);
