@@ -831,3 +831,4 @@ MonoBehaviour:
   missile2: {fileID: 829559891640244176, guid: ec589fa017f0ad646adae5353d295054, type: 3}
   pos1: {fileID: 8033273548641290055}
   pos2: {fileID: 9177904013975385025}
+  dieEffect: {fileID: 4037743601554540605, guid: e2f44d36a29d84b469f3a3d53630afa8, type: 3}

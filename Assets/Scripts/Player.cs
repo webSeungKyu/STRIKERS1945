@@ -147,7 +147,6 @@ public class Player : MonoBehaviour
     }*/
     void Update()
     {
-        Debug.Log(bomb);
         if (helpOnOff)
         {
             helpBar.fillAmount += Time.deltaTime * 0.119f;

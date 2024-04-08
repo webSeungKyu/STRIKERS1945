@@ -8,15 +8,32 @@ public class Boss : MonoBehaviour
     public GameObject missile2;
     public Transform pos1;
     public Transform pos2;
-
+    public GameObject dieEffect;
     int flag = 1;
     int speed = 2;
 
     void Start()
     {
+        StartCoroutine("Die");
         Invoke("Hide", 1.19f);
         StartCoroutine("BossMissile");
         StartCoroutine("BossCircleMissile");
+        
+    }
+    IEnumerator Die()
+    {
+        yield return new WaitForSeconds(15);
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject effect = Instantiate(dieEffect, new Vector2(
+                transform.position.x + Random.Range(-1f, 1f), transform.position.y + Random.Range(-1f, 1f)), Quaternion.identity);
+            yield return new WaitForSeconds(0.2f);
+            Destroy(effect);
+        }
+        Destroy(gameObject);
+
+
+
     }
 
     void Hide()

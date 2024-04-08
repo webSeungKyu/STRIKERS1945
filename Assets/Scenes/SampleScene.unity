@@ -831,11 +831,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Boss
-
-    Warning..
-
-    <b>W</b>ar<b>n</b><b>ing</b><b>!!!</b>'
+  m_text: "<b>\uBCF4\uC2A4</b>\uAC00\n\uB098\uC635\uB2C8\uB2E4..\n<b>\uC870</b>\uC2EC<b>\uD558</b><b>\uC138</b>\uC694<b>!!!</b>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 686549fe3ef34bb41bc8bbd427b3b506, type: 2}
   m_sharedMaterial: {fileID: -6290578455743837122, guid: 686549fe3ef34bb41bc8bbd427b3b506, type: 2}
