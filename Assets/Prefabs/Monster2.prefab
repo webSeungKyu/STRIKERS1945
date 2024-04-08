@@ -162,6 +162,7 @@ MonoBehaviour:
   - {fileID: 4183153654167467528, guid: 5afbe6a19932db3499904f560fbc5dbe, type: 3}
   - {fileID: 4915733087004926145, guid: b499bf288f63e0943a3e796a2925f600, type: 3}
   monsterHp: 400
+  deadEffect: {fileID: 8980158861171755376, guid: 6162964b4303717409de49d31fc8e2c6, type: 3}
 --- !u!61 &-2543558255640492121
 BoxCollider2D:
   m_ObjectHideFlags: 0

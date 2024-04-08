@@ -42,7 +42,7 @@ public class PBullet : MonoBehaviour
             collision.gameObject.GetComponent<Monster>().Attack(damage);
 
             //ÀÌÆåÆ® »ý¼º
-            GameObject newEffect = Instantiate(effect, transform.position, Quaternion.identity);
+            GameObject newEffect = Instantiate(effect2, transform.position, Quaternion.identity);
             Destroy(newEffect, 1.119f);
             //ÃÑ¾Ë »èÁ¦
             Destroy(gameObject);

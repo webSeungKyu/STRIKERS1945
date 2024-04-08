@@ -13,6 +13,7 @@ public class Monster : MonoBehaviour
     public int monsterHp = 100;
     private Color originalColor;
     private SpriteRenderer spriteRenderer;
+    public GameObject deadEffect;
     void Start()
     {
         //한 번 함수 호출
@@ -56,6 +57,8 @@ public class Monster : MonoBehaviour
         if(monsterHp <= 0)
         {
             ItemDrop();
+            GameObject newEffect = Instantiate(deadEffect, transform.position, Quaternion.identity);
+            Destroy(newEffect, 1.119f);
             Destroy(gameObject);
         }
     }
