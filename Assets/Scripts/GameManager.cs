@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
                 gameAudioSource.PlayOneShot(audioClipList[1]);
                 break;
             case 2:
-                gameAudioSource.PlayOneShot(audioClipList[2], 0.7f);
+                gameAudioSource.PlayOneShot(audioClipList[2]);
                 break;
             case 3:
                 gameAudioSource.PlayOneShot(audioClipList[3]);

@@ -56,6 +56,7 @@ public class Monster : MonoBehaviour
 
         if(monsterHp <= 0)
         {
+            GameManager.Instance.AudioPlay(0);
             ItemDrop();
             GameObject newEffect = Instantiate(deadEffect, transform.position, Quaternion.identity);
             Destroy(newEffect, 1.119f);

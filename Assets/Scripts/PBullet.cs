@@ -14,7 +14,12 @@ public class PBullet : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.AudioPlay(3);
+        //총알이 생성될 때마다 너무 소리가 시끄러워서 일정 확률로만 소리 나오게 조정함
+        if(Random.Range(0, 3) == 1)
+        {
+            GameManager.Instance.AudioPlay(3);
+        }
+        
     }
 
     void Update()
@@ -34,18 +39,9 @@ public class PBullet : MonoBehaviour
     {
         if(collision.CompareTag("Monster"))
         {
-            /*//아이템 생성
-            collision.gameObject.GetComponent<Monster>().ItemDrop();
-            //몬스터 삭제
-            Destroy(collision.gameObject);*/
-
-            //데미지 주기
             collision.gameObject.GetComponent<Monster>().Attack(damage);
-
-            //이펙트 생성
             GameObject newEffect = Instantiate(effect2, transform.position, Quaternion.identity);
             Destroy(newEffect, 1.119f);
-            //총알 삭제
             Destroy(gameObject);
 
 

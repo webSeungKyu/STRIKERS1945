@@ -18,12 +18,15 @@ public class Lazer : MonoBehaviour
         
 
     }
-
+    int temp = 0;
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Monster"))
         {
+            Debug.Log("몬스터 스테이");
             GameManager.Instance.AudioPlay(0);
+            GameManager.Instance.AudioPlay(2);
+
             collision.gameObject.GetComponent<Monster>().Attack(200);
             GameObject newEffect = Instantiate(effect[0], collision.transform.position, Quaternion.identity);
             Destroy(newEffect, 0.42f);
@@ -31,11 +34,20 @@ public class Lazer : MonoBehaviour
 
 
         }
-
+        
         if (collision.CompareTag("Boss"))
         {
             GameObject miniEffect = effect[2];
-            GameManager.Instance.AudioPlay(0);
+            
+            temp++;
+            if(temp > 50) 
+            {
+                Debug.Log("보스 스테이");
+
+                temp = 0;
+                GameManager.Instance.AudioPlay(0);
+                GameManager.Instance.AudioPlay(2);
+            }
 
             collision.gameObject.GetComponent<Boss>().Attack(100);
 
