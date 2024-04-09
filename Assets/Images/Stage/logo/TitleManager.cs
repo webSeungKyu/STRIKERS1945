@@ -52,7 +52,7 @@ public class TitleManager : MonoBehaviour
         barUnderText.text = "초보자를 위한\n 루키 모드를 켜는 중..";
         while (barImage.fillAmount != 1 && spaceSwitch)
         {
-            barImage.fillAmount += 3f * Time.deltaTime;
+            barImage.fillAmount += 0.97f * Time.deltaTime;
             yield return new WaitForSeconds(0.1f);
             if(barImage.fillAmount <= 0.4f && barImage.fillAmount >= 0.15f)
             {
