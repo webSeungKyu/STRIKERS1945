@@ -2,12 +2,14 @@
  STRIKERS1945 모작
 
 
+
+https://github.com/webSeungKyu/STRIKERS1945/assets/112837427/19c13aeb-c25b-4608-9c00-32349c596f39
+
+
+
+
+
 ※ 새로 배운 것
-
-
-
-
-
 
 < CompareTag >
 
