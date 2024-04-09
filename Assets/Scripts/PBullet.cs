@@ -52,6 +52,7 @@ public class PBullet : MonoBehaviour
 
         if (collision.CompareTag("Boss"))
         {
+            collision.gameObject.GetComponent<Boss>().Attack(damage);
             GameObject newEffect = Instantiate(effect, transform.position, Quaternion.identity);
             Destroy(newEffect, 0.42f);
             Destroy(gameObject);

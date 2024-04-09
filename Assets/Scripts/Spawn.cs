@@ -24,10 +24,8 @@ public class Spawn : MonoBehaviour
 
     [SerializeField] GameObject textBossWarning;
 
-    private void Awake()
-    {
-        textBossWarning.SetActive(false);
-    }
+    
+
     void Start()
     {
         StartCoroutine("RandomSpawn");

@@ -149,7 +149,7 @@ public class Player : MonoBehaviour
     {
         if (helpOnOff)
         {
-            helpBar.fillAmount += Time.deltaTime * 0.119f;
+            helpBar.fillAmount += Time.deltaTime * 0.42f;
 
             if (helperLv == 2 && helpBar.fillAmount == 1)
             {

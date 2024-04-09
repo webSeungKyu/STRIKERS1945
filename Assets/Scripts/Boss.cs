@@ -11,30 +11,36 @@ public class Boss : MonoBehaviour
     public GameObject dieEffect;
     int flag = 1;
     int speed = 2;
+    public int bossHp = 30000;
+    private Color originalColor;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        StartCoroutine("Die");
         Invoke("Hide", 1.19f);
         StartCoroutine("BossMissile");
         StartCoroutine("BossCircleMissile");
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
+
     }
     IEnumerator Die()
     {
-        yield return new WaitForSeconds(15);
         for (int i = 0; i < 10; i++)
         {
             GameObject effect = Instantiate(dieEffect, new Vector2(
                 transform.position.x + Random.Range(-1f, 1f), transform.position.y + Random.Range(-1f, 1f)), Quaternion.identity);
             yield return new WaitForSeconds(0.2f);
             Destroy(effect);
+
         }
+        yield return new WaitForSeconds(0.2f);
+        GameManager.Instance.StageClear(true);
+        GameManager.Instance.bossDie = true;
         Destroy(gameObject);
-
-
-
     }
+
+
 
     void Hide()
     {
@@ -86,9 +92,26 @@ public class Boss : MonoBehaviour
         }
 
     }
+    public void Attack(int damage)
+    {
+        StartCoroutine("ChangeColor");
+        bossHp -= damage;
+
+        if (bossHp <= 0)
+        {
+            StartCoroutine("Die");
+        }
+    }
+    IEnumerator ChangeColor()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = originalColor;
+    }
 
     void Update()
     {
+
         #region ÁÂ¿ìÀÌµ¿
         if (transform.position.x > 0.6)
         {

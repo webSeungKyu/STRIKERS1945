@@ -5,7 +5,7 @@ using UnityEngine;
 public class Lazer : MonoBehaviour
 {
     GameObject player;
-    public List<GameObject> effect;
+    public List<GameObject> effect = new List<GameObject>();
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -31,7 +31,29 @@ public class Lazer : MonoBehaviour
 
         if (collision.CompareTag("Boss"))
         {
-            GameObject newEffect = Instantiate(effect[1], collision.transform.position, Quaternion.identity);
+            GameObject miniEffect = effect[2];
+
+            collision.gameObject.GetComponent<Boss>().Attack(100);
+
+            int ran = Random.Range(0, 4);
+            switch (ran)
+            {
+                case 0: miniEffect.GetComponent<SpriteRenderer>().flipX = false;
+                    break;
+                case 1:
+                    miniEffect.GetComponent<SpriteRenderer>().flipY = false;
+                    break;
+                case 2:
+                    miniEffect.GetComponent<SpriteRenderer>().flipX = true;
+                    break;
+                case 3:
+                    miniEffect.GetComponent<SpriteRenderer>().flipY = true;
+                    break;
+            }
+            miniEffect.GetComponent<SpriteRenderer>().sortingOrder = 2;
+            miniEffect.transform.localScale = new Vector3(0.5f, 0.5f);
+            GameObject newEffect = Instantiate(miniEffect, collision.transform.position, Quaternion.identity);
+
             Destroy(newEffect, 0.42f);
         }
     }

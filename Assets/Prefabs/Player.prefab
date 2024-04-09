@@ -170,8 +170,8 @@ MonoBehaviour:
   powerUpEffect: {fileID: 2904094778871419134, guid: 61646075de0e31e4c82a1eb9b14b2b3a, type: 3}
   powerUpMaxEffect: {fileID: 8837053048341796082, guid: 4d8fca6c54d9fd34fa45bd8d7294f436, type: 3}
   bombUpEffect: {fileID: 6612230719896495404, guid: f8ffbb6f978b1e040b11211b72de2f41, type: 3}
-  sliderEnergy: {fileID: 0}
-  imageBoom: {fileID: 0}
+  sliderEnergy: {fileID: 5133127823851315352, guid: 57349e723f842a84584a53a570aba563, type: 3}
+  imageBoom: {fileID: 234133236601991649, guid: f18165c953ed9a14bbdc20b265ebd463, type: 3}
   imageEnergys:
   - {fileID: 21300000, guid: 1dea32fd40914204a86296bcb79f8975, type: 3}
   - {fileID: 21300000, guid: 1423cc76958e7e2449d16d825c5e6f47, type: 3}
@@ -183,7 +183,7 @@ MonoBehaviour:
   - {fileID: -2019526322, guid: f8d039c57ed3e60409f0eef71d5f2496, type: 3}
   - {fileID: 691199116, guid: f8d039c57ed3e60409f0eef71d5f2496, type: 3}
   - {fileID: -122720832, guid: f8d039c57ed3e60409f0eef71d5f2496, type: 3}
-  helpBar: {fileID: 0}
+  helpBar: {fileID: 3860458757221339491, guid: 94aa6e17d3832c84088212a25602ed78, type: 3}
   helpOnOff: 1
   help1: {fileID: 7289887201287297011}
   help2: {fileID: 5699748701451160566}
