@@ -13,7 +13,7 @@ public class Item : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector3(Random.Range(42f, 97f), Random.Range(42f, 97f), 0f));
+        rb.AddForce(new Vector3(97f, 97f, 0f));
         #region 벽에 닿으면 머리티얼의 바운스로 튕기게 하였으므로 아래 코드는 주석 처리
         /*randomMove = new Vector2(Random.Range(-1f, 2f), Random.Range(-1f, 2f));
         while (randomMove.x == 0 && randomMove.y == 0)
