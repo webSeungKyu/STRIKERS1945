@@ -189,7 +189,9 @@ public class Player : MonoBehaviour
 
             }
             else if (energyLv > 1 && energyLv <= 3 && bomb > 0)
-            {   
+            {
+                GameManager.Instance.AudioPlay(2);
+                GameManager.Instance.AudioPlay(0);
 
                 bomb--;
                 if(bomb < 0)
@@ -269,6 +271,7 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Power"))
         {
+            GameManager.Instance.AudioPlay(1);
             power += 1;
             StartCoroutine("EffectPower", power);
             if (power >= 3)
@@ -280,7 +283,7 @@ public class Player : MonoBehaviour
         }
         if (collision.CompareTag("Bomb"))
         {
-            
+            GameManager.Instance.AudioPlay(1);
             bomb += 1;
             
             StartCoroutine("EffectBomb", bomb);

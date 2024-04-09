@@ -8,6 +8,33 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public List<GameObject> gameObjects = new List<GameObject>();
+    public AudioSource gameAudioSource = new AudioSource();
+    public List<AudioClip> audioClipList = new List<AudioClip>();
+
+
+    /// <summary>
+    /// 폭탄 : 0, 아이템 : 1, 레이저 : 2, 미사일 : 3
+    /// </summary>
+    /// <param name="i"></param>
+    public void AudioPlay(int i)
+    {
+        switch (i)
+        {
+            case 0:
+                gameAudioSource.PlayOneShot(audioClipList[0]);
+                break;
+                case 1:
+                gameAudioSource.PlayOneShot(audioClipList[1]);
+                break;
+            case 2:
+                gameAudioSource.PlayOneShot(audioClipList[2], 0.7f);
+                break;
+            case 3:
+                gameAudioSource.PlayOneShot(audioClipList[3]);
+                break;
+
+        }
+    }
 
     public void StageClear(bool clear)
     {
@@ -38,7 +65,7 @@ public class GameManager : MonoBehaviour
         StageClear(false);
         GameObject.Find("BossWarning").SetActive(false);
 
-
+        gameAudioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -49,7 +76,7 @@ public class GameManager : MonoBehaviour
     public bool bossDie = false;
     void Update()
     {
-        if(bossDie)
+        if (bossDie)
         {
             StartCoroutine("PlayerNext");
             bossDie = false;
@@ -76,5 +103,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Title");
         
     }
+
+
 
 }

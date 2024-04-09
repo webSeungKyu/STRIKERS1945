@@ -8,19 +8,22 @@ public class Lazer : MonoBehaviour
     public List<GameObject> effect = new List<GameObject>();
     void Start()
     {
+        GameManager.Instance.AudioPlay(2);
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
     {
         gameObject.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 2.5f);
+        
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Monster"))
         {
-
+            GameManager.Instance.AudioPlay(0);
             collision.gameObject.GetComponent<Monster>().Attack(200);
             GameObject newEffect = Instantiate(effect[0], collision.transform.position, Quaternion.identity);
             Destroy(newEffect, 0.42f);
@@ -32,6 +35,7 @@ public class Lazer : MonoBehaviour
         if (collision.CompareTag("Boss"))
         {
             GameObject miniEffect = effect[2];
+            GameManager.Instance.AudioPlay(0);
 
             collision.gameObject.GetComponent<Boss>().Attack(100);
 
